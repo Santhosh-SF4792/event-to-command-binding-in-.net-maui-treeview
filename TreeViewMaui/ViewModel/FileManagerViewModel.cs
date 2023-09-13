@@ -12,7 +12,7 @@ namespace TreeViewMaui
     public class FileManagerViewModel
     {
         #region Fields
-        private Command<ItemSelectionChangedEventArgs> selectionChangedCommand;
+        private Command<object> selectionChangedCommand;
         private ObservableCollection<FileManager> imageNodeInfo;
         #endregion
 
@@ -20,18 +20,18 @@ namespace TreeViewMaui
 
         public FileManagerViewModel()
         {
-            SelectionChangedCommand = new Command<Syncfusion.Maui.TreeView.ItemSelectionChangedEventArgs>(OnSelectionChanged);
+            SelectionChangedCommand = new Command<object>(OnSelectionChanged);
             GenerateSource();
         }
 
-        private void OnSelectionChanged(ItemSelectionChangedEventArgs args)
+        private void OnSelectionChanged(object obj)
         {
-            App.Current.MainPage.DisplayAlert("Alert", (args.AddedItems[0] as FileManager).ItemName + " is selected", "OK");
+            App.Current.MainPage.DisplayAlert("Alert", ((obj as ItemSelectionChangedEventArgs).AddedItems[0] as FileManager).ItemName + " is selected", "OK");
         }
         #endregion
 
         #region Properties
-        public Command<ItemSelectionChangedEventArgs> SelectionChangedCommand
+        public Command<object> SelectionChangedCommand
         {
             get { return selectionChangedCommand; }
             set { selectionChangedCommand = value; }
