@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.TreeView;assembly=Syncfusion.Maui.TreeView"
+             xmlns:local="clr-namespace:TreeViewMaui"
+             x:Class="TreeViewMaui.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:FileManagerViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid>
+            <syncfusion:SfTreeView x:Name="treeView"
+                                   ItemTemplateContextType="Item"
+                                   ItemsSource="{Binding ImageNodeInfo}"
+                                   ChildPropertyName="SubFiles"             
+                                   AutoExpandMode="RootNodesExpanded">
+                <syncfusion:SfTreeView.Behaviors >
+                    <local:EventToCommand EventName="SelectionChanged" Command="{Binding SelectionChangedCommand}"/>
+                </syncfusion:SfTreeView.Behaviors>
+
+                <syncfusion:SfTreeView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="grid">
+                            <Label LineBreakMode="NoWrap" x:Name="label" Text="{Binding ItemName}"  VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfTreeView.ItemTemplate>
+            </syncfusion:SfTreeView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
