@@ -41,6 +41,11 @@ public class FileManagerViewModel
     {
         SelectionChangedCommand = new Command<object>(OnSelectionChanged);
     }
+
+    private void OnSelectionChanged(object obj)
+        {
+            App.Current.MainPage.DisplayAlert("Alert", ((obj as ItemSelectionChangedEventArgs).AddedItems[0] as FileManager).ItemName + " is selected", "OK");
+        }
     #endregion
 
     #region Properties
